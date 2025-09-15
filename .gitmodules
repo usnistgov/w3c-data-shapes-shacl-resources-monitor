@@ -2,3 +2,7 @@
 	path = dependencies/data-shapes
 	url = https://github.com/w3c/data-shapes.git
 	branch = gh-pages
+[submodule "dependencies/shacl-resources"]
+	path = dependencies/shacl-resources
+	url = https://github.com/w3c/shacl-resources.git
+	branch = main
