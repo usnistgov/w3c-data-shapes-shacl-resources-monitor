@@ -42,3 +42,5 @@ check-supply-chain-submodules: \
 	  dependencies
 
 clean:
+	@rm -f \
+	  .*.done.log
