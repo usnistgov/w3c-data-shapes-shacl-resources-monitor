@@ -17,7 +17,8 @@ all: \
   .git_submodule_init.done.log
 
 .PHONY: \
-  check-supply-chain
+  check-supply-chain \
+  check-supply-chain-submodules
 
 .git_submodule_init.done.log: \
   .gitmodules
@@ -29,6 +30,15 @@ check: \
   .git_submodule_init.done.log
 
 check-supply-chain: \
+  check-supply-chain-submodules
+
+check-supply-chain-submodules: \
   .git_submodule_init.done.log
+	git submodule update \
+	  --remote
+	git diff \
+	  --exit-code \
+	  --ignore-submodules=dirty \
+	  dependencies
 
 clean:
