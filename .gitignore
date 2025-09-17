@@ -1,1 +1,3 @@
+*.jar
 .*.done.log
+.venv-pre-commit
