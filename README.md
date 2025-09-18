@@ -44,6 +44,8 @@ This repository implements a [Make](https://en.wikipedia.org/wiki/Make_%28softwa
 
 This software runs in POSIX environments (e.g., Linux, macOS, *BSD, Windows Subsystem for Linux (WSL)).  The Python `venv` module is required (usability can be checked with `python3 -m venv --help`), as are `git` and `make`.  (A note on Make variants: BSD Make is not tested.)
 
+A Java tool is used to normalize syntax as part of the build process.  A Java runtime will be needed.
+
 This software can be run with the following commands, starting from any directory the user prefers.  This will demonstrate operating in `/tmp`.
 
 ```bash
