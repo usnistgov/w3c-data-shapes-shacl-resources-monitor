@@ -23,12 +23,9 @@ all: \
   .venv-pre-commit/var/.pre-commit-built.log \
   .git_submodule_init.done.log
 
-# NOTE: This file is for the original SHACL W3C Recommendation of 2017.
-# Work for SHACL 1.2 will depend instead on
-# shacl12-vocabularies/shacl.ttl and other files.
 # This recipe does not create a file.  It instead guarantees timestamp
 # order for later recipes in this file.
-$(data_shapes_srcdir)/shacl/shacl.ttl: \
+$(data_shapes_srcdir)/shacl12-vocabularies/shacl.ttl: \
   .git_submodule_init.done.log
 	test -r $@
 	touch -c $@
@@ -138,7 +135,7 @@ rdf-toolkit.jar: \
 	# Run pre-commit once to trigger a resource download.
 	source .venv-pre-commit/bin/activate \
 	  && pre-commit run \
-	    --file shacl-owl-ontology.ttl
+	    shacl-owl-ontology.ttl
 	test -r $@
 	touch -c $@
 
@@ -147,12 +144,12 @@ rdf-toolkit.jar: \
 shacl-owl-classes.ttl: \
   .venv.done.log \
   construct-class.sparql \
-  $(data_shapes_srcdir)/shacl/shacl.ttl
+  $(data_shapes_srcdir)/shacl12-vocabularies/shacl.ttl
 	source venv/bin/activate \
 	  && case_sparql_construct \
 	    _$@ \
 	    construct-class.sparql \
-	    $(data_shapes_srcdir)/shacl/shacl.ttl
+	    $(data_shapes_srcdir)/shacl12-vocabularies/shacl.ttl
 	mv _$@ $@
 
 # This recipe intentionally left blank.  This file is a hard-coded
@@ -164,12 +161,12 @@ shacl-owl-ontology.ttl:
 shacl-owl-properties.ttl: \
   .venv.done.log \
   construct-property.sparql \
-  $(data_shapes_srcdir)/shacl/shacl.ttl
+  $(data_shapes_srcdir)/shacl12-vocabularies/shacl.ttl
 	source venv/bin/activate \
 	  && case_sparql_construct \
 	    _$@ \
 	    construct-property.sparql \
-	    $(data_shapes_srcdir)/shacl/shacl.ttl
+	    $(data_shapes_srcdir)/shacl12-vocabularies/shacl.ttl
 	mv _$@ $@
 
 # This file is the combined resource meant to be provided via the
@@ -209,12 +206,12 @@ shacl-owl.ttl: \
 # This has been found useful in the SHACL 1.2 development period for
 # catching when properties are proposed, implemented, but later removed.
 shacl-rdfs-and-owl.ttl: \
-  $(data_shapes_srcdir)/shacl/shacl.ttl \
+  $(data_shapes_srcdir)/shacl12-vocabularies/shacl.ttl \
   shacl-owl.ttl \
   shapes/sh-shacl-owl.ttl
 	source venv/bin/activate \
 	  && rdfpipe \
-	    $(data_shapes_srcdir)/shacl/shacl.ttl \
+	    $(data_shapes_srcdir)/shacl12-vocabularies/shacl.ttl \
 	    shacl-owl.ttl \
 	    > _$@
 	source venv/bin/activate \
